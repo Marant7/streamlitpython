@@ -1,0 +1,32 @@
+name: Deploy Streamlit Dashboard
+
+# Esto define cuándo se debe ejecutar el flujo de trabajo
+on:
+  push:
+    branches:
+      - main  # O la rama en la que deseas activar el flujo de trabajo
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Usa una máquina virtual de Ubuntu
+
+    steps:
+    # Paso 1: Configurar Python
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'  # Usa la versión de Python que necesites
+
+    # Paso 2: Instalar dependencias
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt  # Asegúrate de tener un archivo requirements.txt con las dependencias necesarias
+
+    # Paso 3: Ejecutar tu código de Streamlit
+    - name: Run Streamlit App
+      run: |
+        streamlit run app.py  # Asumiendo que tu archivo principal es 'app.py'
