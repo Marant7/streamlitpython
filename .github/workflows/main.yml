@@ -19,11 +19,11 @@ jobs:
       with:
         python-version: '3.9'  # Especifica la versión de Python que deseas usar
 
-    # Paso 2: Instalar dependencias desde la carpeta 'config'
+    # Paso 2: Instalar dependencias directamente desde el flujo de trabajo
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r config/requirements.txt  # Instala las dependencias desde 'config/requirements.txt'
+        pip install streamlit matplotlib numpy pandas  # Instalación directa de las dependencias necesarias
 
     # Paso 3: Ejecutar la aplicación de Streamlit
     - name: Run Streamlit App
