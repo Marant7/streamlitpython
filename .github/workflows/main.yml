@@ -25,12 +25,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install streamlit matplotlib numpy pandas  # Instalación directa de las dependencias necesarias
 
-    # Paso 3: Listar los archivos en la raíz del repositorio para verificar la presencia de app.py
-    - name: List files in the current directory
-      run: |
-        ls -l  # Esto mostrará todos los archivos en la raíz del repositorio
-
-    # Paso 4: Ejecutar la aplicación de Streamlit
+    # Paso 3: Ejecutar la aplicación de Streamlit desde la subcarpeta 'src'
     - name: Run Streamlit App
       run: |
-        streamlit run app.py  # Ejecuta 'app.py' que está en la raíz
+        streamlit run src/app.py  # Ejecuta 'app.py' que ahora está en la subcarpeta 'src'
