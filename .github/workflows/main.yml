@@ -13,11 +13,11 @@ jobs:
     runs-on: ubuntu-latest  # Usar una máquina virtual de Ubuntu
 
     steps:
-    # Paso 1: Configurar Python
-    - name: Set up Python 3.9
+    # Paso 1: Configurar Python 3.11.9
+    - name: Set up Python 3.11.9
       uses: actions/setup-python@v4
       with:
-        python-version: '3.9'  # Especifica la versión de Python que deseas usar
+        python-version: '3.11.9'  # Usamos la versión 3.11.9 de Python
 
     # Paso 2: Instalar dependencias directamente desde el flujo de trabajo
     - name: Install dependencies
