@@ -3,34 +3,36 @@ name: Deploy Streamlit Dashboard
 on:
   push:
     branches:
-      - main  # Se ejecuta cuando se hace un push a la rama 'main'
+      - main
   pull_request:
     branches:
-      - main  # Se ejecuta cuando se hace un pull request hacia la rama 'main'
+      - main
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest  # Usar una máquina virtual de Ubuntu
+    runs-on: ubuntu-latest
 
     steps:
-    # Paso 1: Configurar Python 3.11.9
-    - name: Set up Python 3.11.9
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11.9'  # Usamos la versión 3.11.9 de Python
+      # Clona el repositorio (¡ESENCIAL!)
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    # Paso 2: Instalar dependencias directamente desde el flujo de trabajo
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install streamlit matplotlib numpy pandas  # Instalación directa de las dependencias necesarias
+      # Configura Python
+      - name: Set up Python 3.11.9
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11.9'
 
-    # Paso 3: Listar los archivos en el directorio actual para verificar la presencia de 'app.py' en la subcarpeta 'src'
-    - name: List files in the current directory
-      run: |
-        ls -R  # Muestra todos los archivos en el directorio y subdirectorios
+      # Instala dependencias
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install streamlit matplotlib numpy pandas
 
-    # Paso 4: Ejecutar la aplicación de Streamlit desde la subcarpeta 'src'
-    - name: Run Streamlit App
-      run: |
-        streamlit run src/app.py  # Ejecuta 'app.py' que ahora está en la subcarpeta 'src'
+      # Debug: Verifica archivos (opcional)
+      - name: List files
+        run: ls -R
+
+      # Ejecuta la app (ajusta la ruta según tu estructura)
+      - name: Run Streamlit App
+        run: streamlit run src/app.py  # Cambia si está en otra ruta
