@@ -1,0 +1,46 @@
+name: Deploy Streamlit Dashboard
+
+on:
+  push:
+    branches:
+      - main  # Se ejecuta cuando se hace un push a la rama 'main'
+  pull_request:
+    branches:
+      - main  # Se ejecuta cuando se hace un pull request hacia la rama 'main'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # Usar una máquina virtual de Ubuntu
+
+    steps:
+    # Paso 1: Configurar Python 3.11.9
+    - name: Set up Python 3.11.9
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11.9'  # Usamos la versión 3.11.9 de Python
+
+    # Paso 2: Instalar dependencias directamente desde el flujo de trabajo
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install streamlit matplotlib numpy pandas  # Instalación directa de las dependencias necesarias
+
+    # Paso 3: Verificar el directorio de trabajo actual
+    - name: Print working directory
+      run: |
+        pwd  # Imprime el directorio de trabajo actual
+
+    # Paso 4: Listar los archivos en el directorio de trabajo
+    - name: List all files
+      run: |
+        ls -R  # Muestra todos los archivos en el directorio y subdirectorios
+
+    # Paso 5: Verificar si la carpeta 'src' y 'app.py' están en la estructura correcta
+    - name: List files in 'src' directory
+      run: |
+        ls -l src  # Asegúrate de que la carpeta 'src' contiene 'app.py'
+
+    # Paso 6: Ejecutar la aplicación de Streamlit desde la subcarpeta 'src'
+    - name: Run Streamlit App
+      run: |
+        streamlit run src/app.py  # Ejecuta 'app.py' que ahora está en la subcarpeta 'src'
