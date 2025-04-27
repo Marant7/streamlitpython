@@ -1,6 +1,5 @@
 name: Deploy Streamlit Dashboard
 
-# Esto define cuándo se debe ejecutar el flujo de trabajo
 on:
   push:
     branches:
@@ -10,7 +9,7 @@ on:
       - main  # Se ejecuta cuando se hace un pull request hacia la rama 'main'
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest  # Usar una máquina virtual de Ubuntu
 
     steps:
@@ -18,7 +17,7 @@ jobs:
     - name: Set up Python 3.9
       uses: actions/setup-python@v4
       with:
-        python-version: '3.9'  # Especifica la versión de Python a usar
+        python-version: '3.9'  # Especifica la versión de Python que deseas usar
 
     # Paso 2: Instalar dependencias
     - name: Install dependencies
@@ -29,4 +28,4 @@ jobs:
     # Paso 3: Ejecutar la aplicación de Streamlit
     - name: Run Streamlit App
       run: |
-        streamlit run app.py  # Asumiendo que el archivo principal de tu app es 'app.py'
+        streamlit run app.py  # Asumiendo que tu archivo principal es 'app.py'
